@@ -1,5 +1,5 @@
 local function log_message(event, msg)
-    print(event.tick .. " [FactoCord] " .. msg)
+    print(event.tick .. " [JAPC] " .. msg)
     -- game.write_file("server.log", msg .. "\n", true)
 end
 
