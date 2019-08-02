@@ -22,7 +22,7 @@ func Chat(s *discordgo.Session, m *discordgo.MessageCreate) {
 				s.ChannelMessageSend(Config.FactorioConsoleChatID, fmt.Sprintf("%s", line.Text))
 			}
 			
-			if strings.Contains(line.Text, "[CHAT]") || strings.Contains(line.Text, "[EMBED]") || strings.Contains(line.Text, "[JOIN]") || strings.Contains(line.Text, "[LEAVE]") || strings.Contains(line.Text, "[KICK]") || strings.Contains(line.Text, "[BAN]"){
+			if strings.Contains(line.Text, "[CHAT]") || strings.Contains(line.Text, "[EMBED]") || strings.Contains(line.Text, "[JOIN]") || strings.Contains(line.Text, "[LEAVE]") || strings.Contains(line.Text, "[KICK]") || strings.Contains(line.Text, "[BAN]") || strings.Contains(line.Text, "[JAPC-EVENT-HANDLE]") {
 				if !strings.Contains(line.Text, "<server>") || Config.PassConsoleChat{
 
 					if strings.Contains(line.Text, "[JOIN]") ||
@@ -37,6 +37,9 @@ func Chat(s *discordgo.Session, m *discordgo.MessageCreate) {
 						if err == nil {
 							s.ChannelMessageSendEmbed(Config.FactorioChannelID, embed)
 						}
+					} else if strings.Contains(line.Text, "[JAPC-EVENT-HANDLE]") {
+							TmpList := strings.Split(line.Text, " ")
+							s.ChannelMessageSend(Config.FactorioChannelID, fmt.Sprintf("%s", strings.Join(TmpList[1:], " ")))
 					} else {
 
 						TmpList := strings.Split(line.Text, " ")

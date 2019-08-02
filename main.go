@@ -107,6 +107,7 @@ func main() {
 		}
 	}()
 	discord()
+	Session.ChannelMessageSend(support.Config.FactorioChannelID, "The factorio crosschat is initializing")
 }
 
 func discord() {
@@ -134,7 +135,7 @@ func discord() {
 	bot.AddHandler(messageCreate)
 	bot.AddHandlerOnce(support.Chat)
 	time.Sleep(3 * time.Second)
-	bot.UpdateStatus(0, "FactoCord V"+FactoCord_version)
+	bot.UpdateStatus(0, "JAPC bot V"+FactoCord_version)
 	fmt.Println("Bot is now running.  Press CTRL-C to exit.")
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
