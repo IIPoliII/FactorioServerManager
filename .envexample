@@ -13,17 +13,25 @@ DiscordToken = ""
 # Developer Mode)
 FactorioChannelID = ""
 
+
+PassConsoleChat = false
+
+EnableConsoleChannel = true
+
+FactorioConsoleChatID = ""
+
+
 # Path to Factorio binary file
 # Example: {factorio_install_dir}/bin/x64/factorio
-Executable = ""
+Executable = "../bin/x64/factorio"
 
 # Launch parameters that are passed to Factorio server.
 # Example: --start-server-load-latest --server-settings {factorio_install_dir}/config/server-settings.json
-LaunchParameters = ""
+LaunchParameters = "--start-server ../saves/japc.zip --server-settings ../data/fctrserver.json --map-settings ../scenarios/JoinAndPlayCoop-Scenario/MapSettigns/map-settigns.json --port 34000 --rcon-port 34001 --rcon-password TEST"
 
 # Comma separated list of user IDs from Discord that will be FactoCord admins
 # These are obtained similarly to channel id.
-AdminIDs = ""
+AdminIDs = "188029101091717120"
 
 # Prefix for basic commands (save, stop...)
 Prefix = "!"
