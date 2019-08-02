@@ -1,0 +1,8 @@
+1. Stop factorio server.
+2. Open your factorio server gamesave
+3. Copy factocord.lua into the gamesave next to control.lua
+4. Edit control.lua and insert 'require "factocord"' at the top of the file.
+5. Make sure control.lua in game save reflects changes
+6. Close game save zip file.
+7. Start factorio server.
+8. Done. All players can join like normal.

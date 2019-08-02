@@ -13,15 +13,18 @@ import (
 	"syscall"
 	"time"
 
-	"./support"
 	"./commands"
 	"./commands/admin"
+	"./support"
 	"github.com/bwmarrin/discordgo"
 	_ "github.com/joho/godotenv/autoload"
 )
 
 // Running is the boolean that tells if the server is running or not
 var Running bool
+var Stopped *bool
+
+var FactoCord_version string
 
 // Pipe is an WriteCloser interface
 var Pipe io.WriteCloser
@@ -33,6 +36,11 @@ func main() {
 	support.Config.LoadEnv()
 	Running = false
 	admin.R = &Running
+	admin.Stopped = false
+	Stopped = &admin.Stopped
+
+	FactoCord_version, _ = getFactoCordVersion()
+	commands.Version = FactoCord_version
 
 	// Do not exit the app on this error.
 	if err := os.Remove("factorio.log"); err != nil {
@@ -53,7 +61,8 @@ func main() {
 		defer wg.Done()
 		for {
 			// If the process is already running DO NOT RUN IT AGAIN
-			if !Running {
+			// Also do NOT start server if the stop command was used.
+			if !Running && !*Stopped {
 				Running = true
 				cmd := exec.Command(support.Config.Executable, support.Config.LaunchParameters...)
 				cmd.Stderr = os.Stderr
@@ -68,11 +77,7 @@ func main() {
 				if err != nil {
 					support.ErrorLog(fmt.Errorf("%s: An error occurred when attempting to start the server\nDetails: %s", time.Now(), err))
 				}
-				if admin.RestartCount > 0 {
-					time.Sleep(3 * time.Second)
-					Session.ChannelMessageSend(support.Config.FactorioChannelID,
-						"Server restarted successfully!")
-				}
+				Session.ChannelMessageSend(support.Config.FactorioChannelID, "The factorio server was started!")
 			}
 			time.Sleep(5 * time.Second)
 		}
@@ -130,8 +135,7 @@ func discord() {
 	bot.AddHandler(messageCreate)
 	bot.AddHandlerOnce(support.Chat)
 	time.Sleep(3 * time.Second)
-	bot.ChannelMessageSend(support.Config.FactorioChannelID, "The server has started!")
-	bot.UpdateStatus(0, support.Config.GameName)
+	bot.UpdateStatus(0, "FactoCord V"+FactoCord_version)
 	fmt.Println("Bot is now running.  Press CTRL-C to exit.")
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
@@ -142,20 +146,21 @@ func discord() {
 }
 
 func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
-	log.Print("[" + m.Author.Username + "] " + m.Content)
-
 	if m.Author.ID == s.State.User.ID {
 		return
 	}
 
+	if strings.HasPrefix(m.Content, support.Config.Prefix) {
+		//command := strings.Split(m.Content[1:len(m.Content)], " ")
+		//name := strings.ToLower(command[0])
+		input := strings.Replace(m.Content, support.Config.Prefix, "", -1)
+		log.Print("[" + m.Author.Username + "] Command: " + input)
+		commands.RunCommand(input, s, m)
+		return
+	}
+
 	if m.ChannelID == support.Config.FactorioChannelID {
-		if strings.HasPrefix(m.Content, support.Config.Prefix) {
-			//command := strings.Split(m.Content[1:len(m.Content)], " ")
-			//name := strings.ToLower(command[0])
-			input := strings.Replace(m.Content, "!", "", -1)
-			commands.RunCommand(input, s, m)
-			return
-		}
+		log.Print("[" + m.Author.Username + "] Says: " + m.Content)
 		// Pipes normal chat allowing it to be seen ingame
 		_, err := io.WriteString(Pipe, fmt.Sprintf("[Discord] <%s>: %s\r\n", m.Author.Username, m.ContentWithMentionsReplaced()))
 		if err != nil {
@@ -164,4 +169,3 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 }
-

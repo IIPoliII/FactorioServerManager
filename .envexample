@@ -1,0 +1,40 @@
+# Sample config. Copy to ".env" and modify values to your needs.
+
+# Your bot's Discord Token. Start by creating a new Application and bot
+# here: https://discordapp.com/developers/applications/me
+DiscordToken = ""
+
+# General chat channel ID (chat messages from the game will be relayed
+# here and vice versa)
+# The ID can be accessed using the "Copy ID" option in the context menu
+# you can open using right clicking on the target channel in the Discord
+# client. If you cannot see the option, you probably have to turn on
+# developer mode (User Settings -> Appearance, scroll down and turn on
+# Developer Mode)
+FactorioChannelID = ""
+
+# Path to Factorio binary file
+# Example: {factorio_install_dir}/bin/x64/factorio
+Executable = ""
+
+# Launch parameters that are passed to Factorio server.
+# Example: --start-server-load-latest --server-settings {factorio_install_dir}/config/server-settings.json
+LaunchParameters = ""
+
+# Comma separated list of user IDs from Discord that will be FactoCord admins
+# These are obtained similarly to channel id.
+AdminIDs = ""
+
+# Prefix for basic commands (save, stop...)
+Prefix = "!"
+
+# Path to mod-list file
+# Example: {factorio_install_dir}/mods/mod-list.json
+ModListLocation = ""
+
+# Grace period between saving the map and killing of the factorio server
+# process. If you run a reasonably large map you should investigate how
+# many seconds the server needs to completely save a game. Low values may
+# result in a corrupted save file.
+# 15 seconds should be good default for even a huge modded map.
+ExitGracePeriod = 15

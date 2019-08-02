@@ -26,7 +26,6 @@ func Chat(s *discordgo.Session, m *discordgo.MessageCreate) {
 						// Don't hard code the channelID! }:<
 						s.ChannelMessageSend(Config.FactorioChannelID, fmt.Sprintf("%s", strings.Join(TmpList[3:], " ")))
 					} else {
-
 						TmpList := strings.Split(line.Text, " ")
 						TmpList[3] = strings.Replace(TmpList[3], ":", "", -1)
 						if strings.Contains(strings.Join(TmpList, " "), "@") {
