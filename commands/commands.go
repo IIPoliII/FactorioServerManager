@@ -65,7 +65,7 @@ func commandListEmbed() *discordgo.MessageEmbed {
 	embed := &discordgo.MessageEmbed{
 		Type:  "rich",
 		Color: 52,
-		Description: "List of all commands currently available in version " + Version + " of JAPC Bot",
+		Description: "List of all commands currently available in version 3.1 of JAPC Bot",
 		Title:  "JAPC Bot Commands",
 		Fields: fields,
 	}
