@@ -35,7 +35,9 @@ end)
 script.on_event(defines.events.on_research_finished, function(event)
     log_research_message(event, "Research finished for")
 end)
-
+script.on_event(defines.events.on_rocket_launched, function(event)
+        RocketLaunchEvent(event)
+end)
 
 function RocketLaunchEvent(event)
     local force = event.rocket.force
@@ -51,21 +53,21 @@ function RocketLaunchEvent(event)
     -- First ever sat launch
     if not global.satellite_sent then
         global.satellite_sent = {}
-        SendBroadcastMsg("Team " .. event.rocket.force.name .. " was the first to launch a rocket!")
+       game.print("Team " .. event.rocket.force.name .. " was the first to launch a rocket!")
 		log_message(event, "Team " .. event.rocket.force.name .. " was the first to launch a rocket!")
     end
 
     -- Track additional satellites launched by this force
     if global.satellite_sent[force.name] then
         global.satellite_sent[force.name] = global.satellite_sent[force.name] + 1   
-        SendBroadcastMsg("Team " .. event.rocket.force.name .. " launched another rocket. Total " .. global.satellite_sent[force.name])
+        game.print("Team " .. event.rocket.force.name .. " launched another rocket. Total " .. global.satellite_sent[force.name])
 		log_message(event, "Team " .. event.rocket.force.name .. " launched another rocket. Total " .. global.satellite_sent[force.name])
 
     -- First sat launch for this force.
     else
         -- game.set_game_state{game_finished=true, player_won=true, can_continue=true}
         global.satellite_sent[force.name] = 1
-        SendBroadcastMsg("Team " .. event.rocket.force.name .. " launched their first rocket!")
+        game.print("Team " .. event.rocket.force.name .. " launched their first rocket!")
 		log_message(event, "Team " .. event.rocket.force.name .. " launched their first rocket!")
         end
     end
