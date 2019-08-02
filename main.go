@@ -40,7 +40,6 @@ func main() {
 	Stopped = &admin.Stopped
 
 	FactoCord_version, _ = getFactoCordVersion()
-	commands.Version = FactoCord_version
 
 	// Do not exit the app on this error.
 	if err := os.Remove("factorio.log"); err != nil {
