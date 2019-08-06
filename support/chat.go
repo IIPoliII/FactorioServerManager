@@ -40,6 +40,8 @@ func Chat(s *discordgo.Session, m *discordgo.MessageCreate) {
 					} else if strings.Contains(line.Text, "[JAPC-EVENT-HANDLE]") {
 							TmpList := strings.Split(line.Text, " ")
 							s.ChannelMessageSend(Config.FactorioChannelID, fmt.Sprintf("%s", strings.Join(TmpList[1:], " ")))
+					} else if  strings.Contains(line.Text, "New RCON connection from IP ADDR") {
+						TmpList := strings.Split(line.Text, " ")
 					} else {
 
 						TmpList := strings.Split(line.Text, " ")
