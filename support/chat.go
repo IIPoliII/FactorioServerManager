@@ -18,10 +18,11 @@ func Chat(s *discordgo.Session, m *discordgo.MessageCreate) {
 			ErrorLog(fmt.Errorf("%s: An error occurred when attempting to tail factorio.log\nDetails: %s", time.Now(), err))
 		}
 		for line := range t.Lines {
-			if !strings.Contains(line.Text, "TransmissionControlHelper.cpp") {
-				s.ChannelMessageSend(Config.FactorioConsoleChatID, fmt.Sprintf("%s", line.Text))
+			if !strings.Contains(line.Text, "TransmissionControlHelper.cpp") || !strings.Contains(line.Text, "New RCON connection from IP ADDR") {
+				if !strings.Contains(line.Text, "New RCON connection from IP ADDR") {
+					s.ChannelMessageSend(Config.FactorioConsoleChatID, fmt.Sprintf("%s", line.Text))
+				}
 			}
-			
 			if strings.Contains(line.Text, "[CHAT]") || strings.Contains(line.Text, "[EMBED]") || strings.Contains(line.Text, "[JOIN]") || strings.Contains(line.Text, "[LEAVE]") || strings.Contains(line.Text, "[KICK]") || strings.Contains(line.Text, "[BAN]") || strings.Contains(line.Text, "[JAPC-EVENT-HANDLE]") {
 				if !strings.Contains(line.Text, "<server>") || Config.PassConsoleChat{
 
@@ -40,8 +41,6 @@ func Chat(s *discordgo.Session, m *discordgo.MessageCreate) {
 					} else if strings.Contains(line.Text, "[JAPC-EVENT-HANDLE]") {
 							TmpList := strings.Split(line.Text, " ")
 							s.ChannelMessageSend(Config.FactorioChannelID, fmt.Sprintf("%s", strings.Join(TmpList[1:], " ")))
-					} else if  strings.Contains(line.Text, "New RCON connection from IP ADDR") {
-						TmpList := strings.Split(line.Text, " ")
 					} else {
 
 						TmpList := strings.Split(line.Text, " ")

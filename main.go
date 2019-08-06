@@ -168,8 +168,6 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		}
 		return
 	}
-		
-	
 		if m.ChannelID == support.Config.FactorioConsoleChatID {
 		fmt.Println("wrote to console from channel: \"", fmt.Sprintf("%s", m.Content), "\"")
 		s.ChannelMessageSend(support.Config.FactorioConsoleChatID, fmt.Sprintf("wrote %s", m.Content))

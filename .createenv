@@ -1,0 +1,17 @@
+DiscordToken = "*****"
+
+FactorioChannelID = "*****"
+
+LaunchParameters = "--start-server-load-scenario JoinAndPlayCoop-Scenario --port 34250 --rcon-port 34251 --rcon-password ******"
+
+Executable = "../bin/x64/factorio"
+
+AdminIDs = "*****"
+
+Prefix = "$"
+
+GameName = "Factorio"
+
+
+
+
