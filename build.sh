@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-version=2.2
+version=3.1
 githash=`git log --pretty=format:'%h' -n 1`
 
 cat << EOF > ./version.go
@@ -15,4 +15,4 @@ func getFactoCordVersion() (string, string) {
 }
 EOF
 
-go build -o ./build/FactoCord main.go version.go
+go build -o ./build/ServerManager main.go version.go
