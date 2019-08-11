@@ -150,7 +150,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-	if strings.HasPrefix(m.Content, support.Config.Prefix) {
+	if strings.HasPrefix(m.Content, support.Config.Prefix) && m.ChannelID == support.Config.FactorioChannelID {
 		//command := strings.Split(m.Content[1:len(m.Content)], " ")
 		//name := strings.ToLower(command[0])
 		input := strings.Replace(m.Content, support.Config.Prefix, "", -1)

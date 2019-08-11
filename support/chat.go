@@ -18,7 +18,7 @@ func Chat(s *discordgo.Session, m *discordgo.MessageCreate) {
 			ErrorLog(fmt.Errorf("%s: An error occurred when attempting to tail factorio.log\nDetails: %s", time.Now(), err))
 		}
 		for line := range t.Lines {
-			if !strings.Contains(line.Text, "TransmissionControlHelper.cpp") || !strings.Contains(line.Text, "New RCON connection from IP ADDR") {
+			if !strings.Contains(line.Text, "TransmissionControlHelper.cpp") || !strings.Contains(line.Text, "New RCON connection from IP ADDR") || !strings.Contains(line.Text, "ServerRouter.cpp") {
 				if !strings.Contains(line.Text, "New RCON connection from IP ADDR") {
 					s.ChannelMessageSend(Config.FactorioConsoleChatID, fmt.Sprintf("%s", line.Text))
 				}
