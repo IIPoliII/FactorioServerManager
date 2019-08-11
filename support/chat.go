@@ -20,7 +20,9 @@ func Chat(s *discordgo.Session, m *discordgo.MessageCreate) {
 		for line := range t.Lines {
 			if !strings.Contains(line.Text, "TransmissionControlHelper.cpp") || !strings.Contains(line.Text, "New RCON connection from IP ADDR") || !strings.Contains(line.Text, "ServerRouter.cpp") {
 				if !strings.Contains(line.Text, "New RCON connection from IP ADDR") {
-					s.ChannelMessageSend(Config.FactorioConsoleChatID, fmt.Sprintf("%s", line.Text))
+					if !strings.Contains(line.Text, "ServerRouter.cpp") {
+						s.ChannelMessageSend(Config.FactorioConsoleChatID, fmt.Sprintf("%s", line.Text))
+					}
 				}
 			}
 			if strings.Contains(line.Text, "[CHAT]") || strings.Contains(line.Text, "[EMBED]") || strings.Contains(line.Text, "[JOIN]") || strings.Contains(line.Text, "[LEAVE]") || strings.Contains(line.Text, "[KICK]") || strings.Contains(line.Text, "[BAN]") || strings.Contains(line.Text, "[JAPC-EVENT-HANDLE]") {
