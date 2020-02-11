@@ -137,6 +137,7 @@ func discord() {
 	time.Sleep(3 * time.Second)
 	bot.UpdateStatus(0, "JAPC bot V"+FactoCord_version)
 	fmt.Println("Bot is now running.  Press CTRL-C to exit.")
+	bot.ChannelMessageSend(support.Config.FactorioChannelID, support.Config.ServerStart)
 	sc := make(chan os.Signal, 1)
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
 	<-sc
