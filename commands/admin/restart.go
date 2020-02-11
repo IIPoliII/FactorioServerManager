@@ -17,5 +17,5 @@ func Restart(s *discordgo.Session, m *discordgo.MessageCreate) {
 		return
 	}
 
-	s.ChannelMessageSend(m.ChannelID, "FactoCord's running/stopped state for Factorio Server is invalid!")
+	s.ChannelMessageSend(m.ChannelID, "JAPC BOT running/stopped state for Factorio Server is invalid!")
 }
