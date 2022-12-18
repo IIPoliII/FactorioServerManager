@@ -38,7 +38,6 @@ func Chat(s *discordgo.Session, m *discordgo.MessageCreate) {
 						message := new(discordgo.MessageSend)
 						err := json.Unmarshal([]byte(fmt.Sprintf("%s", strings.Join(TmpList[3:], " "))), message)
 						if err == nil {
-							message.Tts = false
 							s.ChannelMessageSendComplex(Config.FactorioChannelID, message)
 						}
 					} else if strings.Contains(line.Text, "[JAPC-EVENT-HANDLE]") {
