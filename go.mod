@@ -1,9 +1,9 @@
-module github.com/Didstopia/FactoCord
+module github.com/IIPoliII/FactorioServerManager
 
 go 1.13
 
 require (
-	github.com/IIPoliII/FactorioServerManager v0.0.0-20200211130346-a29c8b3b3ff4 // indirect
+	github.com/IIPoliII/FactorioServerManager v0.0.0-20210211130346-a29c8b3b3ff4 // indirect
 	github.com/bwmarrin/discordgo v0.20.2
 	github.com/gorilla/websocket v1.4.1 // indirect
 	github.com/hpcloud/tail v1.0.0
