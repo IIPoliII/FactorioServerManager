@@ -13,9 +13,9 @@ import (
 	"syscall"
 	"time"
 
-	"./commands"
-	"./commands/admin"
-	"./support"
+	"github.com/IIPoliII/FactorioServerManager/support"
+	"github.com/IIPoliII/FactorioServerManager/commands"
+	"github.com/IIPoliII/FactorioServerManager/commands/admin"
 	"github.com/bwmarrin/discordgo"
 	_ "github.com/joho/godotenv/autoload"
 )

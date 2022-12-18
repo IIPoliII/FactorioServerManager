@@ -3,9 +3,9 @@ package commands
 import (
 	"strings"
 
-	"./admin"
-	"./utils"
-	"../support"
+	"github.com/IIPoliII/FactorioServerManager/commands/admin"
+	"github.com/IIPoliII/FactorioServerManager/commands/utils"
+	"github.com/IIPoliII/FactorioServerManager/support"
 	"github.com/bwmarrin/discordgo"
 )
 

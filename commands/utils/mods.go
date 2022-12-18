@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"../../support"
+	"github.com/IIPoliII/FactorioServerManager/support"
 	"github.com/bwmarrin/discordgo"
 )
 
